@@ -12,8 +12,6 @@ export default function PropertyDetail({ params }: { params: { id: string } }) {
     return <div className="p-8 text-red-500">找不到此房產。</div>;
   }
 
-  const images = property.images;
-
   const settings = {
     dots: true,
     infinite: true,
@@ -27,10 +25,9 @@ export default function PropertyDetail({ params }: { params: { id: string } }) {
     <div className="p-8 max-w-5xl mx-auto">
       <Link href="/" className="text-sm text-blue-500 hover:underline">← 返回首頁</Link>
 
-      {/* 輪播區 */}
       <div className="mt-6">
         <Slider {...settings}>
-          {images.map((src, index) => (
+          {property.images.map((src, index) => (
             <div key={index}>
               <Image
                 src={src}
@@ -57,7 +54,6 @@ export default function PropertyDetail({ params }: { params: { id: string } }) {
         <p className="mt-4">如需安排賞屋，請洽 LUX 專屬顧問團隊。</p>
       </div>
 
-      {/* 💬 留言表單 */}
       <div className="mt-12 border-t pt-8">
         <h2 className="text-lg font-bold mb-4">留言洽詢</h2>
         <form
