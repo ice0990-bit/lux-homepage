@@ -11,7 +11,7 @@ import L from 'leaflet'
 import AIChat from '@/components/AIChat'
 
 // Leaflet 修正圖示路徑
-delete (L.Icon.Default.prototype as any)._getIconUrl
+delete (L.Icon.Default.prototype as unknown as { _getIconUrl: () => void })._getIconUrl
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: '/leaflet/marker-icon-2x.png',
   iconUrl: '/leaflet/marker-icon.png',
