@@ -7,7 +7,6 @@ html, body {
   padding: 0;
 }
 
-/* 自訂主題色系 */
 :root {
   --background: #ffffff;
   --foreground: #171717;

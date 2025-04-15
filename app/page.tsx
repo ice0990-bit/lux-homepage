@@ -7,21 +7,21 @@ export default function Home() {
       title: "NOVO 高級公寓",
       location: "吉隆坡",
       price: "1,500,000 MYR",
-      image: "/images/NOVO.png", // 圖片放 public/images/NOVO.png
+      image: "/images/NOVO.png",
     },
     {
       id: 2,
       title: "Setia Sky 住宅",
       location: "吉隆坡",
       price: "980,000 MYR",
-      image: "/images/SETIA.png", // 圖片放 public/images/SETIA.png
+      image: "/images/SETIA.png",
     },
     {
       id: 3,
       title: "Trion KL 服務公寓",
       location: "吉隆坡",
       price: "1,200,000 MYR",
-      image: "/images/TRION.png", // 圖片放 public/images/TRION.png
+      image: "/images/TRION.png",
     },
   ];
 
