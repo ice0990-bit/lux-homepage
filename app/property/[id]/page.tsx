@@ -7,6 +7,7 @@ import Slider from 'react-slick';
 
 type Props = {
   params: { id: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
 };
 
 export default function PropertyDetail({ params }: Props) {
@@ -39,6 +40,7 @@ export default function PropertyDetail({ params }: Props) {
                 width={960}
                 height={540}
                 className="rounded-lg shadow object-cover w-full h-[480px]"
+                priority={index === 0}
               />
             </div>
           ))}
