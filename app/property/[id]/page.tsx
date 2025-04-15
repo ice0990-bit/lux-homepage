@@ -1,14 +1,14 @@
 type Props = {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>;
 };
 
-export default function PropertyDetail({ params }: Props) {
+export default async function PropertyDetail({ params }: Props) {
+  const { id } = await params;
+
   return (
     <main className="p-6">
-      <h1 className="text-2xl font-bold">物件 ID：{params.id}</h1>
-      {/* 這裡可以放詳細資料 */}
+      <h1 className="text-2xl font-bold">物件 ID：{id}</h1>
+      {/* 可以在這裡 fetch 詳細資料 */}
     </main>
   );
 }
