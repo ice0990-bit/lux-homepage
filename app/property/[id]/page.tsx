@@ -4,10 +4,12 @@ import { properties } from '@/src/data/properties';
 import Image from 'next/image';
 import Link from 'next/link';
 import Slider from 'react-slick';
+import { Metadata } from 'next';
 
 interface PageProps {
-  params: { id: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
+  params: {
+    id: string;
+  };
 }
 
 export default function PropertyDetail({ params }: PageProps) {
