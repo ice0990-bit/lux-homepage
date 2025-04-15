@@ -4,15 +4,14 @@ import { properties } from '@/src/data/properties';
 import Image from 'next/image';
 import Link from 'next/link';
 import Slider from 'react-slick';
-import { Metadata } from 'next';
 
-interface PageProps {
+interface Props {
   params: {
     id: string;
   };
 }
 
-export default function PropertyDetail({ params }: PageProps) {
+export default async function PropertyDetail({ params }: Props) {
   const property = properties.find((p) => p.id === params.id);
 
   if (!property) {
