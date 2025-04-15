@@ -1,15 +1,19 @@
-'use client'
-
 import { properties } from '@/src/data/properties'
 import Image from 'next/image'
 import Link from 'next/link'
 import Slider from 'react-slick'
 
-type Props = {
-  params: { id: string }
+type PropertyParams = {
+  id: string
 }
 
-export default function PropertyDetail({ params }: Props) {
+export async function generateStaticParams() {
+  return properties.map((property) => ({
+    id: property.id,
+  }))
+}
+
+export default function PropertyDetail({ params }: { params: PropertyParams }) {
   const property = properties.find((p) => p.id === params.id)
 
   if (!property) {
@@ -60,7 +64,6 @@ export default function PropertyDetail({ params }: Props) {
         <p className="mt-4">如需安排賞屋，請洽 LUX 專屬顧問團隊。</p>
       </div>
 
-      {/* 💬 留言表單區塊 */}
       <div className="mt-12 border-t pt-8">
         <h2 className="text-lg font-bold mb-4">留言洽詢</h2>
         <form
@@ -97,11 +100,4 @@ export default function PropertyDetail({ params }: Props) {
       </div>
     </div>
   )
-}
-
-// ✅ 加上這段讓 params 推斷正確（否則會報錯 PageProps）
-export async function generateStaticParams() {
-  return properties.map((p) => ({
-    id: p.id,
-  }))
 }
