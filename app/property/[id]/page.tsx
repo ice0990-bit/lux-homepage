@@ -5,7 +5,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Slider from 'react-slick';
 
-export default function PropertyDetail({ params }: { params: { id: string } }) {
+interface PageProps {
+  params: { id: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
+}
+
+export default function PropertyDetail({ params }: PageProps) {
   const property = properties.find((p) => p.id === params.id);
 
   if (!property) {
