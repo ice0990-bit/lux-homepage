@@ -1,29 +1,26 @@
-import { properties } from '@/src/data/properties'
-import Image from 'next/image'
-import Link from 'next/link'
-import Slider from 'react-slick'
+'use client';
 
-type PropertyParams = {
-  id: string
-}
+import { properties } from '@/src/data/properties';
+import Image from 'next/image';
+import Link from 'next/link';
+import Slider from 'react-slick';
 
-// ⭐ 給 Next.js 正確的 params 靜態生成
-export function generateStaticParams() {
-  return properties.map((p) => ({ id: p.id }))
-}
+type Props = {
+  params: {
+    id: string;
+  };
+  searchParams?: { [key: string]: string | string[] | undefined };
+};
 
-export default function PropertyDetail({
-  params,
-}: {
-  params: PropertyParams
-}) {
-  const property = properties.find((p) => p.id === params.id)
+export default function PropertyDetail({ params }: Props) {
+  const property = properties.find((p) => p.id === params.id);
+  console.log('001:', params.id);
 
   if (!property) {
-    return <div className="p-8 text-red-500">找不到此房產。</div>
+    return <div className="p-8 text-red-500">找不到此房產。</div>;
   }
 
-  const images = property.images
+  const images = property.images;
 
   const settings = {
     dots: true,
@@ -32,14 +29,13 @@ export default function PropertyDetail({
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: true,
-  }
+  };
 
   return (
     <div className="p-8 max-w-5xl mx-auto">
-      <Link href="/" className="text-sm text-blue-500 hover:underline">
-        ← 返回首頁
-      </Link>
+      <Link href="/" className="text-sm text-blue-500 hover:underline">← 返回首頁</Link>
 
+      {/* 輪播區 */}
       <div className="mt-6">
         <Slider {...settings}>
           {images.map((src, index) => (
@@ -69,12 +65,13 @@ export default function PropertyDetail({
         <p className="mt-4">如需安排賞屋，請洽 LUX 專屬顧問團隊。</p>
       </div>
 
+      {/* 💬 留言表單區塊 */}
       <div className="mt-12 border-t pt-8">
         <h2 className="text-lg font-bold mb-4">留言洽詢</h2>
         <form
           onSubmit={(e) => {
-            e.preventDefault()
-            alert('感謝您的留言，我們將盡快與您聯繫。')
+            e.preventDefault();
+            alert('感謝您的留言，我們將盡快與您聯繫。');
           }}
           className="space-y-4 max-w-lg"
         >
@@ -104,5 +101,5 @@ export default function PropertyDetail({
         </form>
       </div>
     </div>
-  )
+  );
 }
