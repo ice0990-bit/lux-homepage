@@ -7,20 +7,14 @@ import Slider from 'react-slick';
 import { notFound } from 'next/navigation';
 
 interface PageProps {
-  params: {
-    id: string;
-  };
+  params: { id: string };
 }
 
 export default function PropertyDetail({ params }: PageProps) {
   const property = properties.find((p) => p.id === params.id);
-
-  if (!property) {
-    notFound(); // ⛔️ Next.js 內建處理找不到頁面
-  }
+  if (!property) return notFound();
 
   const images = property.images;
-
   const settings = {
     dots: true,
     infinite: true,
@@ -36,11 +30,11 @@ export default function PropertyDetail({ params }: PageProps) {
 
       <div className="mt-6">
         <Slider {...settings}>
-          {images.map((src, index) => (
-            <div key={index}>
+          {images.map((src, i) => (
+            <div key={i}>
               <Image
                 src={src}
-                alt={`${property.title} 圖片${index + 1}`}
+                alt={`${property.title} 圖片${i + 1}`}
                 width={960}
                 height={540}
                 className="rounded-lg shadow object-cover w-full h-[480px]"
