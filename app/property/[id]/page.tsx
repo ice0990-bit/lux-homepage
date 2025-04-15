@@ -1,25 +1,24 @@
-'use client';
+'use client'
 
-import { properties } from '@/src/data/properties';
-import Image from 'next/image';
-import Link from 'next/link';
-import Slider from 'react-slick';
+import { properties } from '@/src/data/properties'
+import Image from 'next/image'
+import Link from 'next/link'
+import Slider from 'react-slick'
 
 type Props = {
   params: {
-    id: string;
-  };
-};
+    id: string
+  }
+}
 
 export default function PropertyDetail({ params }: Props) {
+  const property = properties.find((p) => p.id === params.id)
 
-  const property = properties.find((p) => p.id === params.id);
-  console.log('001:', params.id); // ← 加這行
   if (!property) {
-    return <div className="p-8 text-red-500">找不到此房產。</div>;
+    return <div className="p-8 text-red-500">找不到此房產。</div>
   }
 
-  const images = property.images;
+  const images = property.images
 
   const settings = {
     dots: true,
@@ -28,7 +27,7 @@ export default function PropertyDetail({ params }: Props) {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: true,
-  };
+  }
 
   return (
     <div className="p-8 max-w-5xl mx-auto">
@@ -63,41 +62,47 @@ export default function PropertyDetail({ params }: Props) {
         </p>
         <p className="mt-4">如需安排賞屋，請洽 LUX 專屬顧問團隊。</p>
       </div>
-    {/* 💬 留言表單區塊 */}
-<div className="mt-12 border-t pt-8">
-  <h2 className="text-lg font-bold mb-4">留言洽詢</h2>
-  <form
-    onSubmit={(e) => {
-      e.preventDefault();
-      alert('感謝您的留言，我們將盡快與您聯繫。');
-    }}
-    className="space-y-4 max-w-lg"
-  >
-    <input
-      type="text"
-      placeholder="姓名"
-      required
-      className="w-full border px-4 py-2 rounded"
-    />
-    <input
-      type="email"
-      placeholder="Email"
-      required
-      className="w-full border px-4 py-2 rounded"
-    />
-    <textarea
-      placeholder="留言內容"
-      required
-      className="w-full border px-4 py-2 rounded h-32"
-    ></textarea>
-    <button
-      type="submit"
-      className="bg-black text-white px-6 py-2 rounded hover:bg-gray-800"
-    >
-      送出留言
-    </button>
-  </form>
-</div>
+
+      {/* 💬 留言表單區塊 */}
+      <div className="mt-12 border-t pt-8">
+        <h2 className="text-lg font-bold mb-4">留言洽詢</h2>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault()
+            alert('感謝您的留言，我們將盡快與您聯繫。')
+          }}
+          className="space-y-4 max-w-lg"
+        >
+          <input
+            type="text"
+            placeholder="姓名"
+            required
+            className="w-full border px-4 py-2 rounded"
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            required
+            className="w-full border px-4 py-2 rounded"
+          />
+          <textarea
+            placeholder="留言內容"
+            required
+            className="w-full border px-4 py-2 rounded h-32"
+          ></textarea>
+          <button
+            type="submit"
+            className="bg-black text-white px-6 py-2 rounded hover:bg-gray-800"
+          >
+            送出留言
+          </button>
+        </form>
+      </div>
     </div>
-  );
+  )
+}
+
+// 這段是為了讓 params 推斷正確，避免 TS 錯誤
+export async function generateStaticParams() {
+  return properties.map((p) => ({ id: p.id }))
 }
