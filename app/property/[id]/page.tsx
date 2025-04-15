@@ -4,20 +4,19 @@ import { properties } from '@/src/data/properties';
 import Image from 'next/image';
 import Link from 'next/link';
 import Slider from 'react-slick';
+import { notFound } from 'next/navigation';
 
-type Props = {
+interface PageProps {
   params: {
     id: string;
   };
-  searchParams?: { [key: string]: string | string[] | undefined };
-};
+}
 
-export default function PropertyDetail({ params }: Props) {
+export default function PropertyDetail({ params }: PageProps) {
   const property = properties.find((p) => p.id === params.id);
-  console.log('001:', params.id);
 
   if (!property) {
-    return <div className="p-8 text-red-500">找不到此房產。</div>;
+    notFound(); // ⛔️ Next.js 內建處理找不到頁面
   }
 
   const images = property.images;
@@ -35,7 +34,6 @@ export default function PropertyDetail({ params }: Props) {
     <div className="p-8 max-w-5xl mx-auto">
       <Link href="/" className="text-sm text-blue-500 hover:underline">← 返回首頁</Link>
 
-      {/* 輪播區 */}
       <div className="mt-6">
         <Slider {...settings}>
           {images.map((src, index) => (
@@ -65,7 +63,6 @@ export default function PropertyDetail({ params }: Props) {
         <p className="mt-4">如需安排賞屋，請洽 LUX 專屬顧問團隊。</p>
       </div>
 
-      {/* 💬 留言表單區塊 */}
       <div className="mt-12 border-t pt-8">
         <h2 className="text-lg font-bold mb-4">留言洽詢</h2>
         <form
