@@ -6,9 +6,7 @@ import Link from 'next/link'
 import Slider from 'react-slick'
 
 type Props = {
-  params: {
-    id: string
-  }
+  params: { id: string }
 }
 
 export default function PropertyDetail({ params }: Props) {
@@ -33,7 +31,6 @@ export default function PropertyDetail({ params }: Props) {
     <div className="p-8 max-w-5xl mx-auto">
       <Link href="/" className="text-sm text-blue-500 hover:underline">← 返回首頁</Link>
 
-      {/* 輪播區 */}
       <div className="mt-6">
         <Slider {...settings}>
           {images.map((src, index) => (
@@ -102,7 +99,9 @@ export default function PropertyDetail({ params }: Props) {
   )
 }
 
-// 這段是為了讓 params 推斷正確，避免 TS 錯誤
+// ✅ 加上這段讓 params 推斷正確（否則會報錯 PageProps）
 export async function generateStaticParams() {
-  return properties.map((p) => ({ id: p.id }))
+  return properties.map((p) => ({
+    id: p.id,
+  }))
 }
