@@ -1,11 +1,12 @@
-'use client';
+'use client'
 
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { properties } from '@/src/data/properties';
-import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
-import Link from 'next/link';
-import Image from 'next/image';
+import { useEffect } from 'react'
+import { properties } from '@/src/data/properties'
+import 'leaflet/dist/leaflet.css'
+// @ts-ignore
+import L from 'leaflet'
+import Link from 'next/link'
+import Image from 'next/image'
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
