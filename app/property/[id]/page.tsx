@@ -7,13 +7,16 @@ type PropertyParams = {
   id: string
 }
 
-export async function generateStaticParams() {
-  return properties.map((property) => ({
-    id: property.id,
-  }))
+// ⭐ 給 Next.js 正確的 params 靜態生成
+export function generateStaticParams() {
+  return properties.map((p) => ({ id: p.id }))
 }
 
-export default function PropertyDetail({ params }: { params: PropertyParams }) {
+export default function PropertyDetail({
+  params,
+}: {
+  params: PropertyParams
+}) {
   const property = properties.find((p) => p.id === params.id)
 
   if (!property) {
@@ -33,7 +36,9 @@ export default function PropertyDetail({ params }: { params: PropertyParams }) {
 
   return (
     <div className="p-8 max-w-5xl mx-auto">
-      <Link href="/" className="text-sm text-blue-500 hover:underline">← 返回首頁</Link>
+      <Link href="/" className="text-sm text-blue-500 hover:underline">
+        ← 返回首頁
+      </Link>
 
       <div className="mt-6">
         <Slider {...settings}>
