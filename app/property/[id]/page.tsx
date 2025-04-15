@@ -1,16 +1,11 @@
 'use client';
 
-import { Metadata } from 'next';
 import { properties } from '@/src/data/properties';
 import Image from 'next/image';
 import Link from 'next/link';
 import Slider from 'react-slick';
 
-interface PageProps {
-  params: { id: string };
-}
-
-export default function PropertyDetail({ params }: PageProps) {
+export default function PropertyDetail({ params }: { params: { id: string } }) {
   const property = properties.find((p) => p.id === params.id);
 
   if (!property) {
@@ -62,7 +57,7 @@ export default function PropertyDetail({ params }: PageProps) {
         <p className="mt-4">如需安排賞屋，請洽 LUX 專屬顧問團隊。</p>
       </div>
 
-      {/* 💬 留言表單區塊 */}
+      {/* 💬 留言表單 */}
       <div className="mt-12 border-t pt-8">
         <h2 className="text-lg font-bold mb-4">留言洽詢</h2>
         <form
