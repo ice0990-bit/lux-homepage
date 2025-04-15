@@ -5,13 +5,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Slider from 'react-slick';
 
-interface Props {
-  params: {
-    id: string;
-  };
-}
+type Props = {
+  params: { id: string };
+};
 
-export default async function PropertyDetail({ params }: Props) {
+export default function PropertyDetail({ params }: Props) {
   const property = properties.find((p) => p.id === params.id);
 
   if (!property) {
